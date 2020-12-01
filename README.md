@@ -1,4 +1,4 @@
-# md2reveal
+# mdtoreveal
 
 It's an extremly basic
 [Markdown](https://daringfireball.net/projects/markdown/) to
@@ -11,12 +11,12 @@ syntax highlighting by handling it.
 
 ## Usage
 
-    md2reveal my_prez.md --output my_prez.html
+    mdtoreveal my_prez.md --output my_prez.html
 
 It's also allowed to skip the output file, so its name is guessed, the
 previous command is equivalent to the following one:
 
-    md2reveal my_prez.md
+    mdtoreveal my_prez.md
 
 ## Syntax
 
@@ -67,5 +67,5 @@ HTML := $(SRCS:.md=.html)
 static: $(HTML)
 
 %.html: %.md
-	md2reveal $< -o $@
+	mdtoreveal $< -o $@
 ```

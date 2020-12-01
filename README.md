@@ -18,6 +18,26 @@ previous command is equivalent to the following one:
 
     md2reveal my_prez.md
 
+## Syntax
+
+Let's start with pure Markdown:
+
+    # Big titles makes reveal.js "columns"
+
+    ## Sub titles make reveal.js "slides" inside columns.
+
+    ```python
+    print("Syntax highlighting works")
+    ```
+
+    ::: notes
+
+    Look, this is a personal note, it's not mandatory to use them, but you still can.
+    Everything betwen `::: notes` and the next slide is only visible by the presenter.
+
+    ## 2nd slide
+
+    Blah blah …
 
 ## Configuration
 

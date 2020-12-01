@@ -254,7 +254,8 @@ def main():
     tpl = jinja2.Template(TPL)
 
     root = Path(args.html).resolve().parent
-    reveal_path = root / f"reveal.js-{REVEAL_JS_VERSION}"
+    reveal_dir = f"reveal.js-{REVEAL_JS_VERSION}"
+    reveal_path = root / reveal_dir
     if not reveal_path.exists():
         tarball = io.BytesIO(requests.get(REVEAL_ARCHIVE).content)
         tarfile.open(fileobj=tarball, mode="r:gz").extractall(root)
@@ -274,7 +275,7 @@ def main():
         sections.append(slides)
 
     with open(args.html, "w") as f:
-        f.write(tpl.render(slides=sections, revealjs_url=reveal_path))
+        f.write(tpl.render(slides=sections, revealjs_url=reveal_dir))
 
 
 if __name__ == "__main__":

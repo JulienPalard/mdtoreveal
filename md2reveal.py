@@ -1,7 +1,12 @@
 import re
+import tarfile
+import io
 from pathlib import Path
-import jinja2
 import argparse
+
+import jinja2
+import requests
+
 
 TPL = """
 <!DOCTYPE html>
@@ -60,13 +65,24 @@ def parse_args():
     parser = argparse.ArgumentParser()
     parser.add_argument("md", help="Markdown input file")
     parser.add_argument("html", help="HTML output file")
-    parser.add_argument("--revealjs-url", help="Path or URL to revealjs")
     return parser.parse_args()
+
+
+REVEAL_JS_VERSION = "4.1.0"
+REVEAL_ARCHIVE = (
+    f"https://github.com/hakimel/reveal.js/archive/{REVEAL_JS_VERSION}.tar.gz"
+)
 
 
 def main():
     args = parse_args()
     tpl = jinja2.Template(TPL)
+
+    root = Path(args.html).resolve().parent
+    reveal_path = root / f"reveal.js-{REVEAL_JS_VERSION}"
+    if not reveal_path.exists():
+        tarball = io.BytesIO(requests.get(REVEAL_ARCHIVE).content)
+        tarfile.open(fileobj=tarball, mode="r:gz").extractall(root)
 
     with open(args.md) as f:
         md = f.read()
@@ -83,7 +99,7 @@ def main():
         sections.append(slides)
 
     with open(args.html, "w") as f:
-        f.write(tpl.render(slides=sections, revealjs_url=args.revealjs_url))
+        f.write(tpl.render(slides=sections, revealjs_url=reveal_path))
 
 
 if __name__ == "__main__":

@@ -39,6 +39,17 @@ Let's start with pure Markdown:
 
     Blah blah …
 
+
+## Example
+
+It converts
+[this](https://framagit.org/JulienPalard/atelier-perf/-/blob/master/perf.md)
+into [this](https://julienpalard.frama.io/atelier-perf/perf.html)
+(this one uses a
+[.gitlab-ci.yml](https://framagit.org/JulienPalard/atelier-perf/-/blob/master/.gitlab-ci.yml)
+to publish on push).
+
+
 ## Configuration
 
 There's not, deal with it, don't loose your time on fine-tuning, and
